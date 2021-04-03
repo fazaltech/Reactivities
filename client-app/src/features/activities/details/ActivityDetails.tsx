@@ -15,7 +15,7 @@ const ActivityDetails: React.FC<IProps>= ({activity, setEditMode ,setSelectedAct
             <Image src={`/assets/categoryImages/${activity.category}.jpg`} wrapped ui={false} />
             <Card.Content>
                 <Card.Header>{activity.title}</Card.Header>
-                <Card.Meta>
+                <Card.Meta> 
                     <span>{activity.date}</span>
                 </Card.Meta>
                 <Card.Description>
@@ -24,8 +24,14 @@ const ActivityDetails: React.FC<IProps>= ({activity, setEditMode ,setSelectedAct
             </Card.Content>
             <Card.Content extra>
             <Button.Group widths={2}>
-                <Button onClick={() =>setEditMode(true)} basic color='blue' content='Edit'/>
-                <Button onClick={() =>setSelectedActivity(null)} basic color='grey' content='Cancel'/>
+                <Button 
+                onClick={() =>setEditMode(true)} 
+                basic 
+                color='blue'
+                 content='Edit'/>
+                <Button onClick={() =>setSelectedActivity(null)} 
+                basic color='grey' 
+                content='Cancel'/>
             </Button.Group>
             </Card.Content>
         </Card>

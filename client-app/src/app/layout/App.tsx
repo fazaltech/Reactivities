@@ -22,6 +22,20 @@ const App = () => {
       setEditMode(true);
     }
 
+    const handleCreateActivity = (activity : IActivity) =>
+    {
+      setActivites([...activities,activity]);
+      setSelectedActivity(activity);
+      setEditMode(false);
+    }
+
+    const handleEditActivity = (activity : IActivity) =>
+    {
+      setActivites([...activities.filter(a=>a.id !==activity.id),activity]);
+      setSelectedActivity(activity);
+      setEditMode(false);
+    }
+
 const handleSelectActivity =(id: string) =>{
   setSelectedActivity(activities.filter(a=>a.id===id)[0])
 }
@@ -43,6 +57,8 @@ const handleSelectActivity =(id: string) =>{
          editMode={editMode}
          setEditMode={setEditMode}
          setSelectedActivity ={setSelectedActivity}
+         createActivity ={handleCreateActivity}
+         editActivity={handleEditActivity}
         />
       </Container>
     </Fragment>
