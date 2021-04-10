@@ -8,6 +8,7 @@ interface IProps {
     activity: IActivity;
     createActivity: (activity: IActivity) => void;
     editActivity: (activity: IActivity) => void;
+    submitting: boolean;
 }
 
 const ActivityForm: React.FC<IProps> = (
@@ -15,7 +16,8 @@ const ActivityForm: React.FC<IProps> = (
         setEditMode,
         activity: initializeFormState,
         createActivity,
-        editActivity
+        editActivity,
+        submitting
     }) => {
 
     const initializeForm = () => {
@@ -77,7 +79,7 @@ const ActivityForm: React.FC<IProps> = (
                 <Form.Input
                     onChange={handleInputChange}
                     name='date'
-                    type='date'
+                    type='datetime-local'
                     placeholder='Date'
                     value={activity.date} />
                 <Form.Input
@@ -92,6 +94,7 @@ const ActivityForm: React.FC<IProps> = (
                     value={activity.venue} />
                 <Button
                     floated='right'
+                    loading={submitting}
                     positive
                     type='submit'
                     content='Submit' />
