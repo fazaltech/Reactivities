@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
      [Route("api/[controller]")]
-    [ApiController]
+     [ApiController]
     public class ActivitiesController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -39,6 +39,8 @@ namespace API.Controllers
 
         public async Task<ActionResult<Unit>> Create(Create.Command command)
         {
+    
+            
             return await _mediator.Send(command);
    
         }
