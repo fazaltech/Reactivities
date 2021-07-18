@@ -5,6 +5,7 @@ import { v4 as uuid } from 'uuid';
 import ActivityStore from '../../../app/stores/activityStore';
 import { observer } from 'mobx-react-lite';
 import { RouteComponentProps } from 'react-router';
+import {Form as FinalForm,Field} from 'react-final-form';
 
 interface DetailParams {
   id: string;
@@ -51,21 +52,21 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
     activity.id.length
   ]);
 
-  const handleSubmit = () => {
-    if (activity.id.length === 0) {
-      let newActivity = {
-        ...activity,
-        id: uuid()
-      };
-      createActivity(newActivity).then(() =>
-        history.push(`/activities/${newActivity.id}`)
-      );
-    } else {
-      editActivity(activity).then(() =>
-        history.push(`/activities/${activity.id}`)
-      );
-    }
-  };
+  // const handleSubmit = () => {
+  //   if (activity.id.length === 0) {
+  //     let newActivity = {
+  //       ...activity,
+  //       id: uuid()
+  //     };
+  //     createActivity(newActivity).then(() =>
+  //       history.push(`/activities/${newActivity.id}`)
+  //     );
+  //   } else {
+  //     editActivity(activity).then(() =>
+  //       history.push(`/activities/${activity.id}`)
+  //     );
+  //   }
+  // };
 
   const handleInputChange = (
     event: FormEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -74,16 +75,24 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
     setActivity({ ...activity, [name]: value });
   };
 
+  const handleFinalFormSubmit=(value : any)=>{
+    console.log(value);
+  }
+
   return (
     <Grid>
       <Grid.Column width={10}>
         <Segment clearing>
-          <Form onSubmit={handleSubmit}>
-            <Form.Input
-              onChange={handleInputChange}
+          <FinalForm 
+          onSubmit={handleFinalFormSubmit}
+          render={({handleSubmit})=>(
+            <Form onSubmit={handleSubmit}>
+            <Field
+         
               name='title'
               placeholder='Title'
               value={activity.title}
+              component='input'
             />
             <Form.TextArea
               onChange={handleInputChange}
@@ -131,6 +140,9 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
               content='Cancel'
             />
           </Form>
+          )}
+          />
+          
         </Segment>
       </Grid.Column>
     </Grid>
