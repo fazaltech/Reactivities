@@ -152,4 +152,5 @@ const ActivityForm: React.FC<RouteComponentProps<DetailParams>> = ({
   );
 };
 
+
 export default observer(ActivityForm);
